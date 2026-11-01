@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4.1 SVG House</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .controls { margin: 0.5rem 0 0.75rem; }
+    .controls button {
+      font: inherit; padding: 0.45rem 0.9rem; border-radius: 6px; cursor: pointer;
+      border: 1px solid #1f6f8b; background: #fff; color: #1f6f8b; font-weight: 600;
+    }
+    .controls button[aria-pressed="true"] { background: #1f6f8b; color: #fff; }
+    #house { display: block; width: 100%; max-width: 1000px; height: auto; border: 1px solid #ccc; }
+    table.summary td:first-child { white-space: nowrap; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="index.html">COS30045 Exercise 4.1</a>
+      <span class="crumb">Exercise 4.1 · Customised drawing</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Exercise 4.1 — SVG house and garden</h1>
+
+    <div class="controls">
+      <button id="toggle-ann" type="button" aria-pressed="false">Show coordinates</button>
+    </div>
+
+    <svg id="house" viewBox="0 0 1000 750" role="img" aria-label="A house with a red roof, two windows and a door, a tree, the sun and a cloud">
+      <style>
+        .sky    { fill: #87ceeb; }
+        .grass  { fill: #4caf50; }
+        .sun    { fill: #ffd23f; }
+        .cloud  { fill: #ffffff; }
+        .trunk  { fill: #8b5a2b; }
+        .leaf   { fill: #2e8b3a; }
+        .wall   { fill: #e2b07a; }
+        .roof   { fill: #9b2f22; }
+        .glass  { fill: #bfe3f5; }
+        .frame  { stroke: #5b3a1e; stroke-width: 4; }
+        .door   { fill: #5b3a1e; }
+        .number { font: bold 24px sans-serif; fill: #ffffff; text-anchor: middle; }
+        .path   { fill: #d8c3a0; }
+
+        #coords circle { fill: #e6007e; }
+        #coords text   { font: 15px monospace; fill: #000000; paint-order: stroke; stroke: #ffffff; stroke-width: 4px; stroke-linejoin: round; }
+      </style>
+
+      <rect class="sky" x="0" y="0" width="1000" height="480" />
+      <rect class="grass" x="0" y="480" width="1000" height="270" />
+
+      <circle class="sun" cx="860" cy="110" r="55" />
+      <ellipse class="cloud" cx="200" cy="100" rx="80" ry="35" />
+
+      <g transform="translate(150, 0)">
+        <rect class="trunk" x="-18" y="400" width="36" height="200" />
+        <circle class="leaf" cx="0" cy="360" r="70" />
+      </g>
+
+      <rect class="wall" x="300" y="360" width="400" height="290" />
+      <path class="roof" d="M280,360 L500,200 L720,360 Z" />
+
+      <g transform="translate(340, 400)">
+        <rect class="glass" x="0" y="0" width="90" height="80" />
+        <line class="frame" x1="45" y1="0" x2="45" y2="80" />
+        <line class="frame" x1="0" y1="40" x2="90" y2="40" />
+      </g>
+      <g transform="translate(570, 400)">
+        <rect class="glass" x="0" y="0" width="90" height="80" />
+        <line class="frame" x1="45" y1="0" x2="45" y2="80" />
+        <line class="frame" x1="0" y1="40" x2="90" y2="40" />
+      </g>
+
+      <rect class="door" x="455" y="500" width="90" height="150" />
+      <text class="number" x="500" y="540">12</text>
+
+      <path class="path" d="M455,650 L545,650 L620,750 L380,750 Z" />
+
+      <g id="coords" style="display:none">
+        <circle cx="0" cy="0" r="6" />       <text x="10" y="22">(0, 0)</text>
+        <circle cx="200" cy="100" r="5" />   <text x="208" y="92">(200, 100)</text>
+        <circle cx="860" cy="110" r="5" />   <text x="868" y="102">(860, 110)</text>
+        <circle cx="132" cy="400" r="5" />   <text x="124" y="420" text-anchor="end">(132, 400)</text>
+        <circle cx="500" cy="200" r="5" />   <text x="500" y="188" text-anchor="middle">(500, 200)</text>
+        <circle cx="720" cy="360" r="5" />   <text x="728" y="352">(720, 360)</text>
+        <circle cx="300" cy="360" r="5" />   <text x="292" y="352" text-anchor="end">(300, 360)</text>
+        <circle cx="340" cy="400" r="5" />   <text x="348" y="392">(340, 400)</text>
+        <circle cx="570" cy="400" r="5" />   <text x="578" y="392">(570, 400)</text>
+        <circle cx="455" cy="500" r="5" />   <text x="447" y="515" text-anchor="end">(455, 500)</text>
+        <circle cx="380" cy="750" r="6" />   <text x="372" y="740" text-anchor="end">(380, 750)</text>
+      </g>
+    </svg>
+  </main>
+
+  <script>
+    const coords = document.getElementById('coords');
+    const toggle = document.getElementById('toggle-ann');
+
+    toggle.addEventListener('click', () => {
+      const show = coords.style.display === 'none';
+      coords.style.display = show ? '' : 'none';
+      toggle.textContent = show ? 'Hide coordinates' : 'Show coordinates';
+      toggle.setAttribute('aria-pressed', show);
+    });
+  </script>
+</body>
+</html>
